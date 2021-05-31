@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { Trans, useTranslation } from 'react-i18next';
+import {EuiSelect} from "@elastic/eui"
 
 function App() {
 	const { t, i18n } = useTranslation()
@@ -14,13 +15,17 @@ function App() {
 
 	const options = [
 		{ value: "en", text: "English" },
-		{ value: "vi", text: "Vietnamese" },
-		{ value: "tg", text: "Tagalog" },
+		{ value: "jp", text: "Japanese" },
 	]
+
+  const onChange = (e: { target: { value: React.SetStateAction<string> } }) => {
+		setValue(e.target.value)
+		changeLanguage(e.target.value)
+	}
 
   return (
     <div className="App">
-      
+      <EuiSelect options={options} value={value} onChange={(e) => onChange(e)}></EuiSelect>
       <button onClick={() => {changeLanguage("en")}}>EN</button>
       <button onClick={() => {changeLanguage("jp")}}>JP</button>
       <hr />
@@ -30,6 +35,7 @@ function App() {
          <div>{t("description.part2")}</div> */}
          <div>{t('this is a sentence')}</div>
          <div>{t('how are you?')}</div>
+         <div>{t('Yummy')}</div>
     </div>
   );
 }
